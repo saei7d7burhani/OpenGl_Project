@@ -9,8 +9,8 @@ This project is a **3D Interactive Car Showroom** built using **Modern OpenGL (C
 - **Camera Modes**:
  - Free Roam Camera
  - Orbit Camera
- - Driver’s Seat Camera
-- **Interactive Main Car**: Open doors, rotate wheels, and interact with the driver’s seat.
+ - Driverâ€™s Seat Camera
+- **Interactive Main Car**: Open doors, rotate wheels, and interact with the driverâ€™s seat.
 - **Lighting**:
  - Directional Light
  - Point Light
