@@ -2,6 +2,7 @@
 #include<glad/glad.h>
 #include<GLFW/glfw3.h>
 #include "src/graphics/Shader.h"
+#include "src/graphics/Renderer.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
@@ -51,16 +52,16 @@ int main()
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
 	// Copy the vertex data into the VBO
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	   glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-	// Configure the vertex attribute pointers
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
-	glEnableVertexAttribArray(1);
+	   // Configure the vertex attribute pointers
+	   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	   glEnableVertexAttribArray(0);
+	   glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+	   glEnableVertexAttribArray(1);
 
-	// Unbind the VAO (optional, for safety)
-	glBindVertexArray(0);
+	   // Unbind the VAO (optional, for safety)
+	   glBindVertexArray(0);
 
 	// Create shader program
 	Shader shader("shaders/main.vert", "shaders/main.frag");
@@ -79,6 +80,9 @@ int main()
 	shader.setMat4("view", view);
 	shader.setMat4("projection", projection);
 
+	// Initialize renderer
+	Renderer renderer;
+	renderer.initialize(vertices, sizeof(vertices));		
 
 	// Main while loop
 	while (!glfwWindowShouldClose(window))
@@ -97,19 +101,13 @@ int main()
 		// Update the light position in the shader
 		shader.setVec3("lightPos", lightPos);
 
-		// Bind the VAO and draw the triangle
-		glBindVertexArray(VAO);
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glm::mat4 model = glm::mat4(1.0f);
+		renderer.draw(shader, model);
 
 		// Swap buffers and poll events
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
-
-	// Delete the VAO and VBO
-	glDeleteVertexArrays(1, &VAO);
-	glDeleteBuffers(1, &VBO);
-
 	// Delete window before ending the program
 	glfwDestroyWindow(window);
 	// Terminate GLFW before ending the program

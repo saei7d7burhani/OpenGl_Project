@@ -17,7 +17,7 @@ public:
     void setVec3(const std::string& name, const glm::vec3& value);
 
     // Existing method for setting a mat4 uniform
-    void setMat4(const std::string& name, const glm::mat4& value);
+    void setMat4(const std::string& name, const glm::mat4& value) const;
 
 private:
     std::string readFile(const char* filePath);
