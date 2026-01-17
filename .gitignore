@@ -9,6 +9,7 @@
 *.vcxproj.user
 *.ipch
 *.opensdf
+.vs/
 
    # Ignore system files
    Thumbs.db
