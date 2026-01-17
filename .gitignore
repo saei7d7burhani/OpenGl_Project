@@ -1,0 +1,15 @@
+# Ignore build files
+/build/
+*.obj
+*.exe
+*.log
+
+# Ignore Visual Studio files
+*.sdf
+*.vcxproj.user
+*.ipch
+*.opensdf
+
+   # Ignore system files
+   Thumbs.db
+   .DS_Store
