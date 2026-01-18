@@ -10,11 +10,15 @@ public:
     Renderer();
     ~Renderer();
 
-    void initialize(float* vertices, size_t size);
+    // vertexSizeBytes = sizeof(vertices), indexSizeBytes = sizeof(indices), indexCount = element count in indices
+    void initialize(float* vertices, size_t vertexSizeBytes,
+                    unsigned int* indices, size_t indexSizeBytes,
+                    GLsizei indexCount);
     void draw(const Shader& shader, const glm::mat4& model);
 
 private:
-    GLuint VAO, VBO;
+    GLuint VAO{}, VBO{}, EBO{};
+    GLsizei m_indexCount{0};
 };
 
 #endif // RENDERER_H

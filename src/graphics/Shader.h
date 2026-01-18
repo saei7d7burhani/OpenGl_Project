@@ -19,8 +19,11 @@ public:
     // Existing method for setting a mat4 uniform
     void setMat4(const std::string& name, const glm::mat4& value) const;
 
+    // Add this method declaration to the Shader class public section
+    void setInt(const std::string& name, int value) const;
+
 private:
-    std::string readFile(const char* filePath);
+    std::string get_file_contents(const char* filePath);
     void checkCompileErrors(GLuint shader, const std::string& type);
 };
 
